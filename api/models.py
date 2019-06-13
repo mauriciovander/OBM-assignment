@@ -12,16 +12,16 @@ class Company(models.Model):
         return self.name
     
 
-class Member(models.Model): 
-    firstname = models.CharField(max_length=100)   
+class Member(User):
+    # firstname = models.CharField(max_length=100)   
     infix = models.CharField(max_length=20, blank=True)    
-    lastname = models.CharField(max_length=100)
+    # lastname = models.CharField(max_length=100)
     jobtitle = models.CharField(max_length=50, blank=True)
-    company = models.ForeignKey(Company, on_delete=models.CASCADE)
     photo = models.URLField(blank=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s %s' % (self.firstname, self.lastname)
+        return '%s %s' % (self.first_name, self.last_name)
     
     @property
     def company_name(self):
@@ -34,3 +34,27 @@ class Member(models.Model):
     @property
     def company_photo(self):
         return self.company.photo
+
+
+# class Member(models.Model): 
+#     firstname = models.CharField(max_length=100)   
+#     infix = models.CharField(max_length=20, blank=True)    
+#     lastname = models.CharField(max_length=100)
+#     jobtitle = models.CharField(max_length=50, blank=True)
+#     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+#     photo = models.URLField(blank=True)
+
+#     def __str__(self):
+#         return '%s %s' % (self.firstname, self.lastname)
+    
+#     @property
+#     def company_name(self):
+#         return self.company.name
+
+#     @property
+#     def company_address(self):
+#         return self.company.address
+
+#     @property
+#     def company_photo(self):
+#         return self.company.photo
