@@ -9,43 +9,27 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+# Scripts folder
 
-## Install postgreSQL (MacOS)
-`brew install postgres`
+Create Database:
+`./scripts/createdb.sh`
 
-`pg_ctl -D /usr/local/var/postgres start`
+Create and run migrations
+`./scripts/migrate.sh``
 
-## Create DB and user
-```
-createdb obm
-createuser obm
-```
+Create Superuser
+`./scripts/createadmin.sh`
 
-`$ psql obm` 
-
-```
-alter user obm with encrypted password 'obm';
-grant all privileges on database obm to obm ;
-\q
-```
+Run application
+`./scripts/runserver.sh`
 
 
-## Install psycopg2 dependency (required for Postgres integration)
-| postgress must be installed before
-`pip install psycopg2`
 
-Run DB Migration: 
-`python manage.py migrate`
+## Routes: 
 
-```
-python manage.py makemigrations api
-python manage.py migrate
-```
+API Documentation
 
-## Create superuser
+https://documenter.getpostman.com/view/399359/S1ZuerHk?version=latest
 
-```
-python manage.py createsuperuser --email admin@example.com --username admin
-password: obmn2019
-```
+
 

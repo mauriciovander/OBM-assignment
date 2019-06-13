@@ -17,4 +17,4 @@ class MemberSerializer(serializers.ModelSerializer):
 
     class Meta:
         model =  Member
-        fields = ('id', 'firstname', 'infix', 'lastname', 'jobtitle', 'company', 'company_name','company_address', 'company_photo')
+        fields = ('id', 'firstname', 'infix', 'lastname', 'jobtitle', 'photo', 'company', 'company_name','company_address', 'company_photo')

@@ -8,7 +8,7 @@ import django_filters
 
 class CompanyView(viewsets.ModelViewSet):
     def get_queryset(self):
-        user = self.request.user
+        user = self.request.user        
         print(user) #--> AnonymousUser
         return Company.objects.filter()
 
@@ -24,7 +24,10 @@ class MemberView(viewsets.ModelViewSet):
     # lookup_field = 'id'
     def get_queryset(self):
         user = self.request.user
+        # user.staff = True
+        # user.admin = True
         print(user) #--> AnonymousUser
+        
         return Member.objects.filter()
         # return Member.objects.all().filter(company_id=user.company_id).order_by('lastname')
 

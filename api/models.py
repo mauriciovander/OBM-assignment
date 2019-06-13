@@ -1,11 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
-
-
-# When a member is returned from the API, 
-# the following information should be returned: 
-# first name, infix, last name, photo, company name, job title, company photo, company address.
 
 class Company(models.Model):
     name = models.CharField(max_length=100, unique=True)    
@@ -17,7 +15,9 @@ class Company(models.Model):
         return self.name
     
 
-class Member(models.Model):
+class Member(models.Model): 
+    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # owner = models.ForeignKey('auth.User', related_name='Member', on_delete=models.CASCADE)
     firstname = models.CharField(max_length=100)   
     infix = models.CharField(max_length=20, blank=True)    
     lastname = models.CharField(max_length=100)
@@ -40,4 +40,12 @@ class Member(models.Model):
     def company_photo(self):
         return self.company.photo
 
-    
+    # @receiver(post_save, sender=User)
+    # def create_user_profile(sender, instance, created, **kwargs):
+    #     if created:
+    #         Profile.objects.create(user=instance)
+
+    # @receiver(post_save, sender=User)
+    # def save_user_profile(sender, instance, **kwargs):
+    #     instance.profile.save()
+
