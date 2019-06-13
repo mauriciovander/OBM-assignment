@@ -13,9 +13,7 @@ class Company(models.Model):
     
 
 class Member(User):
-    # firstname = models.CharField(max_length=100)   
     infix = models.CharField(max_length=20, blank=True)    
-    # lastname = models.CharField(max_length=100)
     jobtitle = models.CharField(max_length=50, blank=True)
     photo = models.URLField(blank=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -34,27 +32,3 @@ class Member(User):
     @property
     def company_photo(self):
         return self.company.photo
-
-
-# class Member(models.Model): 
-#     firstname = models.CharField(max_length=100)   
-#     infix = models.CharField(max_length=20, blank=True)    
-#     lastname = models.CharField(max_length=100)
-#     jobtitle = models.CharField(max_length=50, blank=True)
-#     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-#     photo = models.URLField(blank=True)
-
-#     def __str__(self):
-#         return '%s %s' % (self.firstname, self.lastname)
-    
-#     @property
-#     def company_name(self):
-#         return self.company.name
-
-#     @property
-#     def company_address(self):
-#         return self.company.address
-
-#     @property
-#     def company_photo(self):
-#         return self.company.photo

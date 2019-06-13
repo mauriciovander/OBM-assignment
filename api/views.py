@@ -22,7 +22,7 @@ class CompanyView(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, )
-    search_fields = ('name','address', )
+    search_fields = ('name', 'address', )
     ordering_fields = '__all__'
 
     
@@ -30,9 +30,6 @@ class MemberView(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        # TODO: Create filter based on authenticated user
-        # user.staff = True
-        # user.admin = True
         if(str(user)=='AnonymousUser'):
             return Member.objects.filter(id=-1)
 
@@ -47,5 +44,5 @@ class MemberView(viewsets.ModelViewSet):
     serializer_class = MemberSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     filter_backends = (filters.SearchFilter, filters.OrderingFilter, )
-    search_fields = ('last_name','first_name', )
+    search_fields = ('last_name', 'first_name', 'company_name', 'company_address',)
     ordering_fields = '__all__'
