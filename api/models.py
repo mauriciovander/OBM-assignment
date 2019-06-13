@@ -9,7 +9,8 @@ from django.db import models
 
 class Company(models.Model):
     name = models.CharField(max_length=100, unique=True)    
-    address = models.TextField()
+    address = models.TextField(blank=True)
+    photo = models.URLField(blank=True)
     # photo = models.FileField(upload_to= )
     
     def __str__(self):
@@ -22,7 +23,7 @@ class Member(models.Model):
     lastname = models.CharField(max_length=100)
     jobtitle = models.CharField(max_length=50, blank=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    # photo = models.FileField(upload_to= )
+    photo = models.URLField(blank=True)
 
     def __str__(self):
         return '%s %s' % (self.firstname, self.lastname)
@@ -34,5 +35,9 @@ class Member(models.Model):
     @property
     def company_address(self):
         return self.company.address
+
+    @property
+    def company_photo(self):
+        return self.company.photo
 
     

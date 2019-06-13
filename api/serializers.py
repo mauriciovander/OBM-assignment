@@ -6,13 +6,15 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('id', 'name', 'address')
+        fields = ('id', 'name', 'address', 'photo')
 
 
 # class MemberSerializer(serializers.HyperlinkedModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
     company_name = serializers.ReadOnlyField()
+    company_photo = serializers.ReadOnlyField()
+    company_address = serializers.ReadOnlyField()
 
     class Meta:
         model =  Member
-        fields = ('id', 'firstname', 'infix', 'lastname', 'jobtitle', 'company_name', 'company')
+        fields = ('id', 'firstname', 'infix', 'lastname', 'jobtitle', 'company', 'company_name','company_address', 'company_photo')
