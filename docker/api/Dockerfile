@@ -8,8 +8,6 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-# RUN chmod +x /app/migrate.sh
-
 WORKDIR /app
 
 EXPOSE 8000

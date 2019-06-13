@@ -24,7 +24,6 @@ Run application
 `./scripts/runserver.sh`
 
 
-
 ## Routes: 
 
 API Documentation
