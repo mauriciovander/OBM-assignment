@@ -11,6 +11,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from dotenv import load_dotenv
+from os.path import join, dirname
+
+# Create .env file path.
+dotenv_path = join(dirname(__file__), '../.env')
+
+# Load file from the path.
+load_dotenv(dotenv_path)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +28,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(ie3e8$p^6m8oi&j0-80@(fu#i*9)#cvv5*4@(q9@4ozzrm6uu'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')=='True'
 
 ALLOWED_HOSTS = []
 
@@ -39,10 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'oauth2_provider',
-    'social_django',
-    'rest_framework_social_oauth2',
     'api',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
 
 ROOT_URLCONF = 'obm_assignment.urls'
@@ -83,11 +91,11 @@ WSGI_APPLICATION = 'obm_assignment.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'obm',
-        'USER': 'obm',
-        'PASSWORD': 'obm',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -128,3 +136,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES' : ('rest_framework.permissions.AllowAny', ),
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication', 
+        'rest_framework.authentication.SessionAuthentication'
+        ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'oauth2_provider.backends.OAuth2Backend',
+)

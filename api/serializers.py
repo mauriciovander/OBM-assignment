@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Company, Member
 
+# class CompanySerializer(serializers.HyperlinkedModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -8,9 +9,10 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'address')
 
 
+# class MemberSerializer(serializers.HyperlinkedModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
-    # company = CompanySerializer(many=False, read_only=True)
+    company_name = serializers.ReadOnlyField()
 
     class Meta:
         model =  Member
-        fields = ('id', 'firstname', 'lastname', 'company')
+        fields = ('id', 'firstname', 'infix', 'lastname', 'jobtitle', 'company_name', 'company')

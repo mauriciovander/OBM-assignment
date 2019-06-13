@@ -9,29 +9,6 @@ pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-## Create Django Project
-
-`django-admin startproject obm_assignment .`
-
-## Set up Postgress Engine in obm_assignment/settings.py 
-
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'obm',
-        'USER': 'obm',
-        'PASSWORD': 'obm',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-```
-
-## Start App
-
-`django-admin startapp api`
-
 
 ## Install postgreSQL (MacOS)
 `brew install postgres`
@@ -42,7 +19,7 @@ DATABASES = {
 ```
 createdb obm
 createuser obm
-````
+```
 
 `$ psql obm` 
 
@@ -53,7 +30,8 @@ grant all privileges on database obm to obm ;
 ```
 
 
-## Install psycopg2 dependency (required for Postgres)
+## Install psycopg2 dependency (required for Postgres integration)
+| postgress must be installed before
 `pip install psycopg2`
 
 Run DB Migration: 
@@ -64,13 +42,10 @@ python manage.py makemigrations api
 python manage.py migrate
 ```
 
+## Create superuser
+
 ```
 python manage.py createsuperuser --email admin@example.com --username admin
 password: obmn2019
 ```
-
-
-
-
-
 
