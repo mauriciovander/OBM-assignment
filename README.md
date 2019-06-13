@@ -15,7 +15,7 @@ Create Database:
 `./scripts/createdb.sh`
 
 Create and run migrations
-`./scripts/migrate.sh``
+`./scripts/migrate.sh`
 
 Create Superuser
 `./scripts/createadmin.sh`
